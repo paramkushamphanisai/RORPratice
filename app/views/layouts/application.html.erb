@@ -12,9 +12,7 @@
   </head>
 
   <body>
-    <% flash.each do |name,title|%>
-    <p><%=title%></p>
-    <%end%>
+    <%= render "layouts/messages"%>
     <%= yield %>
   </body>
 </html>

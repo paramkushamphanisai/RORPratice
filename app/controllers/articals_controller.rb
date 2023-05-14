@@ -1,8 +1,8 @@
 class ArticalsController < ApplicationController
+    before_action :setArtical, only: [:show,:edit,:update,:destroy] 
     
     def show
         #byebug
-        @artical=Artical.find(params[:id])
     end
 
     def index
@@ -16,11 +16,10 @@ class ArticalsController < ApplicationController
     end
 
     def edit
-        @artical=Artical.find(params[:id])
     end
 
     def create
-        @artical = Artical.new(params.require(:artical).permit(:title, :description))
+        @artical = Artical.new(artical_params)
         if @artical.save
             flash[:notice]="Artical is saved successfully"
             redirect_to @artical
@@ -33,8 +32,8 @@ class ArticalsController < ApplicationController
     end
 
     def update
-        @artical=Artical.find(params[:id])
-        if Artical.update(params.require(:artical).permit(:title, :description))
+        
+        if Artical.update(artical_params)
             flash[:notice]="Artical has updated"
             redirect_to @artical
         else
@@ -44,4 +43,18 @@ class ArticalsController < ApplicationController
               end
         end
     end
+
+    def destroy
+        
+        @artical.delete
+        redirect_to articals_path
+    end
+    private
+    def setArtical()
+        @artical= Artical.find(params[:id])
+    end
+    def artical_params
+        params.require(:artical).permit(:title, :description)
+    end
+
 end

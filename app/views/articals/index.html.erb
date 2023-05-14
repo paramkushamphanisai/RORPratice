@@ -13,9 +13,12 @@
             <tr>
             <td scope="col"><%= i.title %></td>
             <td scope="col"><%= i.description %></td>
-            <td scope="col">Action</td>
+            <td scope="col"><%= link_to "Show", artical_path(i.id)%></td>
+            <td scope="col"><%= link_to "Edit", edit_artical_path(i.id)%></td>
+            <td scope="col"><%= link_to "Delete", artical_path(i.id), data: { "turbo-method": :delete } %></td>
             </tr>
         </tbody>
         <% end %>
     
 </table>
+ <%= link_to "New", new_artical_path(@artical)%>
